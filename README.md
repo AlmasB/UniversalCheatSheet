@@ -57,3 +57,13 @@ The `TestRepo` repo is now clonable (replace `IP_ADDRESS` with appropriate ip):
 ```bash
 git clone ssh://git@IP_ADDRESS:/git/TestRepo.git
 ```
+
+## Deploying to Heroku
+
+First obtain Heroku account (and Heroku CLI?)
+
+1. Create App
+2. Create Github repo for that
+3. Dashboard Heroku -> Deploy -> Github -> auto deploy from master
+
+From now on pushing to that Github repo will result in auto deployment to Heroku
