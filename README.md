@@ -67,3 +67,10 @@ First obtain Heroku account (and Heroku CLI?)
 3. Dashboard Heroku -> Deploy -> Github -> auto deploy from master
 
 From now on pushing to that Github repo will result in auto deployment to Heroku
+
+## Using VM as web-server
+
+1. Install apache and start service
+2. `firewall-cmd --add-service=http`
+3. Using host, set network mode to NAT and port forward ip = empty, port = 8080 to ip = empty, port = 80
+4. Connect using host's ip
