@@ -1,19 +1,34 @@
 # UniversalCheatSheet
 Contains various things that are useful for work but can be forgotten
 
-## GPG Keys
+## GPG Keys (e.g. for Maven Central via OSSRH)
 
 ```bash
 gpg --gen-key
 
 gpg --list-keys
 
+// where XXXXXXXX is pub ..../XXXXXXXX from the --list-keys
 gpg --keyserver hkp://pgp.mit.edu --send-keys XXXXXXXX
 ```
+
+## Prepare for Maven Central (via OSSRH)
+
+1. Open [Jira Ticket](https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&pid=10134)
+
+Summary: lib description
+Group Id: com.github.almasb
+Project URL: https://github.com/AlmasB/PROJECT
+SCM url: https://github.com/AlmasB/PROJECT.git
+
+2. Prepare pom.xml (TODO: generic pom.xml)
+
+3. Generate GPG key (if needed?)
 
 ## Maven Deploy
 
 ```bash
+// -Dgpg.passphrase=XXXXXXX is not necessary if added to .m2/settings.xml
 mvn clean deploy -Dgpg.passphrase=XXXXXXX
 ```
 
