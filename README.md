@@ -28,8 +28,15 @@ SCM url: https://github.com/AlmasB/PROJECT.git
 ## Maven Deploy
 
 ```bash
-// -Dgpg.passphrase=XXXXXXX is not necessary if added to .m2/settings.xml
+// -Dgpg.passphrase=XXXXXXX is not necessary if added to .m2/settings.xml as shown below
 mvn clean deploy -Dgpg.passphrase=XXXXXXX
+```
+
+```
+<server>
+    <id>gpg.passphrase</id>
+    <passphrase>XXXXXXX</passphrase>
+</server>
 ```
 
 ## Typical 2-branch development release
@@ -37,6 +44,61 @@ mvn clean deploy -Dgpg.passphrase=XXXXXXX
 1. pull request -> merge -> delete branch
 2. local switch to master -> git pull
 3. mvn clean deploy (if passphrase set via settings.xml)
+
+## Auto-deploying latest snapshot builds after successful Travis CI
+
+1. Export your gpg keyring
+
+```
+gpg --export > all.gpg
+```
+
+2. Encrypt gpg key data using openssl (use openssl directly since travis seems broken on Windows)
+
+```
+// replace PASSWORD with pass to use for encrypting 
+openssl aes-256-cbc -pass pass:PASSWORD -in all.gpg -out all.gpg.enc
+```
+
+3. Encrypt the PASSWORD using travis env vars
+
+```
+travis encrypt ENC_PASSWORD=PASSWORD --add env.global
+```
+
+4. Decrypt gpg key data on Travis
+
+```
+openssl aes-256-cbc -pass pass:$ENC_PASSWORD -in all.gpg.enc -out all.gpg -d
+
+// quietly import gpg keyring
+gpg -q --fast-import all.gpg
+```
+
+5. Add the following to travis_settings.xml, encrypting vars as needed,
+where KEYNAME is the XXXXXXXX from gpg --list-keys
+
+```
+<profiles>
+    <profile>
+        <id>ossrh</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <properties>
+            <gpg.executable>gpg</gpg.executable>
+            <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
+            <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
+        </properties>
+    </profile>
+</profiles>
+```
+
+6. Deploy if not on master branch
+
+```
+if [ "$TRAVIS_BRANCH" != "master" ]; then mvn deploy --settings travis_settings.xml; fi
+```
 
 ## Installing own git server (partially taken from [here](https://blog.jixee.me/how-to-migrate-from-github-to-a-self-hosted-repository/))
 
