@@ -151,3 +151,10 @@ From now on pushing to that Github repo will result in auto deployment to Heroku
 2. `firewall-cmd --add-service=http`
 3. Using host, set network mode to NAT and port forward ip = empty, port = 8080 to ip = empty, port = 80
 4. Connect using host's ip
+
+## Bulk resize using imagemagick
+
+```
+cd images_dir/
+mogrify -resize 16x12 -quality 100 -path ./new_resized *.jpg
+```
