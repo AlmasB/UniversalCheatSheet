@@ -17,6 +17,6 @@ git push
 
 echo "Running maven deploy"
 
-mvn clean deploy
+mvn clean deploy -DskipTests=true -Dlicense.skip=true -Dpmd.skip=true
 
 echo "Released $version"
