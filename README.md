@@ -158,3 +158,13 @@ From now on pushing to that Github repo will result in auto deployment to Heroku
 cd images_dir/
 mogrify -resize 16x12 -quality 100 -path ./new_resized *.jpg
 ```
+
+## Bulk convert using imagemagick
+
+```
+for file in $PWD/*.png
+    do
+        filename=$(basename $file)
+        magick "$file" "${filename%.png}.pdf"
+    done
+```
