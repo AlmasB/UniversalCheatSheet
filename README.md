@@ -45,6 +45,20 @@ mvn clean deploy -Dgpg.passphrase=XXXXXXX
 2. local switch to master -> git pull
 3. mvn clean deploy (if passphrase set via settings.xml)
 
+## Test PRs locally
+
+1. Get the PR
+
+```
+git fetch origin pull/PR_NUM/head:NEW_BRANCH_NAME
+```
+
+2. Switch to new branch
+
+```
+git checkout NEW_BRANCH_NAME
+```
+
 ## Auto-deploying latest snapshot builds after successful Travis CI
 
 1. Export your gpg keyring
