@@ -2,7 +2,7 @@
 
 branch_name="$1"
 
-git checkout -b $branch_name
+git checkout $branch_name
 
 mvn versions:set -DnewVersion="$1-SNAPSHOT"
 mvn versions:commit

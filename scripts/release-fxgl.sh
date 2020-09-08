@@ -16,7 +16,7 @@ function release_fxgl {
 
     echo "Running maven deploy"
 
-    mvn clean deploy -DskipTests=true -Dlicense.skip=true -Dpmd.skip=true
+    mvn -T 12 clean deploy -DskipTests=true -Dlicense.skip=true -Dpmd.skip=true
 
     echo "Released $version"
 }
@@ -24,7 +24,7 @@ function release_fxgl {
 function make_uber_jar {
     echo "Running maven package"
 
-    mvn clean package -DskipTests=true -Dlicense.skip=true -Dpmd.skip=true -P uber-jar
+    mvn -T 12 clean package -DskipTests=true -Dlicense.skip=true -Dpmd.skip=true -P uber-jar
     cp fxgl/target/fxgl-"$version"-uber.jar ~/Desktop
     
     echo "Packaged and copied uber-jar to Desktop"
