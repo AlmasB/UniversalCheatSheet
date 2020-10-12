@@ -17,7 +17,7 @@
         <maven.shade.version>2.4.2</maven.shade.version>
 
         <kotlin.version>1.0.0</kotlin.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
 
     <dependencies>
