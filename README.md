@@ -182,3 +182,14 @@ for file in $PWD/*.png
         magick "$file" "${filename%.png}.pdf"
     done
 ```
+
+## Compile JNI .dll with Visual Studio 2019
+
+0. `javac -h . YourNativeClass.java`
+1. Open VS -> select DLL project.
+2. Remove all headers (apart from pch.h) and source files.
+3. Project properties -> General -> additional includes -> add `JDK/include` and `JDK/include/win32`.
+4. Linker -> add any .lib files as appropriate.
+5. Create a new header (.h) file and copy-paste javac-generated header file.
+6. Create a new cpp (.cpp) file and implement the header.
+7. Project -> Build gives a .dll file.
