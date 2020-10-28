@@ -193,3 +193,9 @@ for file in $PWD/*.png
 5. Create a new header (.h) file and copy-paste javac-generated header file.
 6. Create a new cpp (.cpp) file and implement the header.
 7. Project -> Build gives a .dll file.
+
+## Compile JNI .so with g++
+
+0. ...
+1. `g++ -c -fPIC -I ... file.cpp`
+2. `g++ -shared -l ... -o libname.so`
