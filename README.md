@@ -197,5 +197,16 @@ for file in $PWD/*.png
 ## Compile JNI .so with g++
 
 0. ...
-1. `g++ -c -fPIC -I ... file.cpp`
-2. `g++ -shared -l ... -o libname.so`
+1. `g++ -fPIC -I ... -shared -m64 -o libname.so file.cpp -l ...`
+
+For example, SDL2:
+
+0. Build SDL2 with `../configure CFLAGS=-fPIC CPPFLAGS=-fPIC && make -j 8`
+1. Copy libSDL2.a to /usr/lib/x86_64-linux-gnu
+2. 
+
+```
+g++ -fPIC -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" -I/usr/include/SDL2 -D_REENTRANT -shared -m64 -o libfxgl_controllerinput.so fxgl_controllerinput.cpp -L/usr/lib/x86_64-linux-gnu -l:libSDL2.a -Wl,--no-undefined -lm -ldl -lasound -lm -ldl -lpthread -lpulse-simple -lpulse -lsndio -lX11 -lXext -lXcursor -lXinerama -lXi -lXrandr -lXss -lXxf86vm -lwayland-egl -lwayland-client -lwayland-cursor -lxkbcommon -lpthread -lrt
+```
+
+The above list is obtained from `sdl2-config --static-libs`.
