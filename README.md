@@ -210,3 +210,9 @@ g++ -fPIC -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" -I/usr/include/SDL
 ```
 
 The above list is obtained from `sdl2-config --static-libs`.
+
+## Check module dependencies of a modular jar
+
+```
+java -p file.jar --list-modules
+```
