@@ -214,5 +214,7 @@ The above list is obtained from `sdl2-config --static-libs`.
 ## Check module dependencies of a modular jar
 
 ```
-java -p file.jar --list-modules
+jar --file=file.jar -d
+// this doesn't seem precise
+//java -p file.jar --list-modules
 ```
