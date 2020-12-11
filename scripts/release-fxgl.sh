@@ -3,17 +3,9 @@
 version="$1"
 
 function release_fxgl {
-    echo "Setting new version to $version"
-
-    mvn versions:set -DnewVersion="$version"
-
     echo "Running maven deploy"
 
     mvn -T 12 clean deploy -DskipTests=true -Dlicense.skip=true -Dpmd.skip=true
-
-    echo "Released $version"
-    
-    mvn versions:revert
 }
 
 function make_uber_jar {
@@ -29,6 +21,15 @@ if [ "$version" == "" ]; then
     echo "Please provide release version"
 else
     echo "Releasing..."
+    echo "Setting new version to $version"
+
+    mvn versions:set -DnewVersion="$version"
+    
     release_fxgl
+    
+    echo "Released $version"
+    
     make_uber_jar
+    
+    mvn versions:revert
 fi
