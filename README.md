@@ -1,6 +1,14 @@
 # UniversalCheatSheet
 Contains various things that are useful for work but can be forgotten
 
+## GPG Keys (for GitHub Actions)
+
+```
+gpg --armor --export-secret-keys
+```
+
+Then copy-paste the entire text (ctrl+A) into Action Secret on GitHub
+
 ## GPG Keys (e.g. for Maven Central via OSSRH)
 
 ```bash
@@ -165,6 +173,24 @@ From now on pushing to that Github repo will result in auto deployment to Heroku
 2. `firewall-cmd --add-service=http`
 3. Using host, set network mode to NAT and port forward ip = empty, port = 8080 to ip = empty, port = 80
 4. Connect using host's ip
+
+## Bulk rename
+
+```
+To rename:
+
+image0001.png
+image0002.png
+image0003.png
+
+To:
+
+0001.png
+0002.png
+0003.png
+
+for f in *.png; do mv "$f" "${f#image}"; done
+```
 
 ## Bulk resize using imagemagick
 
