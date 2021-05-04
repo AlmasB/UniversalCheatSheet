@@ -244,3 +244,15 @@ jar --file=file.jar -d
 // this doesn't seem precise
 //java -p file.jar --list-modules
 ```
+
+## Generate beamer slides from .md using pandoc
+
+```
+pandoc -t beamer file.md -o slides.pdf
+```
+
+OR if just .md to PDF:
+
+```
+pandoc file.md -s -o file.pdf
+```
